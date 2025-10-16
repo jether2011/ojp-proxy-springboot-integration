@@ -1,0 +1,44 @@
+---
+
+spring:
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  datasource:
+    type: org.springframework.jdbc.datasource.SimpleDriverDataSource
+    url: ${database.url}
+    username: ${database.username}
+    password: ${database.password}
+    driver-class-name: org.openjproxy.jdbc.Driver
+  #    hikari:
+#      poolName: Hikari
+#      auto-commit: false
+#      minimum-idle: 1
+#      minimum-pool-size: 2
+#      idle-timeout: 300000 # 10 minutes
+#      maximum-pool-size: 2
+#      connection-timeout: 30000 # 30 seconds
+#      data-source-properties:
+#        reWriteBatchedInserts: true
+  jpa:
+    open-in-view: false
+    repositories:
+      bootstrap-mode: deferred
+    properties:
+      hibernate.jdbc.time_zone: UTC
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      # modify batch size as necessary
+      hibernate.jdbc.batch_size: 50
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+      hibernate:
+        format_sql: true
+      show_sql: false
+    hibernate:
+      ddl-auto: none

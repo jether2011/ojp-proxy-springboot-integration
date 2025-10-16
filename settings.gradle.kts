@@ -1,1 +1,1 @@
-rootProject.name = "ojp-demo"
+rootProject.name = "ojp-integration-demo"

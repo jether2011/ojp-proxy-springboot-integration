@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ojp-integration-demo
+  config:
+    import:
+      - classpath:database.yml
+      - optional:file:./env.properties
+  lifecycle:
+    timeout-per-shutdown-phase: 1m
+
+server:
+  port: 9080
+  shutdown: graceful

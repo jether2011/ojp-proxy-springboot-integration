@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.example"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 description = "Demo project for Spring Boot and OJP Proxy integration"
 
 java {
@@ -21,6 +21,7 @@ repositories {
 }
 
 dependencies {
+	// Implementations
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -28,8 +29,19 @@ dependencies {
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-database-postgresql")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	// OJP Proxy JDBC Driver
+	implementation("org.openjproxy:ojp-jdbc-driver:0.1.1-beta") {
+		exclude(group = "com.zaxxer", module = "HikariCP")
+		exclude(group = "org.slf4j", module = "slf4j-simple")
+		exclude(group = "org.slf4j", module = "slf4j-api")
+	}
+
+	// Development and Runtime
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	runtimeOnly("org.postgresql:postgresql")
+
+	// Testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
