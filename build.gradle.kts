@@ -22,20 +22,23 @@ repositories {
 
 dependencies {
 	// Implementations
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-jdbc") {
+		exclude(group = "com.zaxxer", module = "HikariCP")
+	}
+	implementation("org.springframework.boot:spring-boot-starter-web") {
+		exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
+	}
+	implementation("org.springframework.boot:spring-boot-starter-undertow")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-database-postgresql")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
 	// OJP Proxy JDBC Driver
-	implementation("org.openjproxy:ojp-jdbc-driver:0.1.1-beta") {
-		exclude(group = "com.zaxxer", module = "HikariCP")
-		exclude(group = "org.slf4j", module = "slf4j-simple")
-		exclude(group = "org.slf4j", module = "slf4j-api")
-	}
+	implementation("org.openjproxy:ojp-jdbc-driver:0.1.1-beta")
 
 	// Development and Runtime
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
@@ -57,8 +60,4 @@ allOpen {
 	annotation("jakarta.persistence.Entity")
 	annotation("jakarta.persistence.MappedSuperclass")
 	annotation("jakarta.persistence.Embeddable")
-}
-
-tasks.withType<Test> {
-	useJUnitPlatform()
 }

@@ -2,6 +2,9 @@
 
 spring:
   flyway:
+    url: ${database.url}
+    user: ${database.username}
+    password: ${database.password}
     enabled: true
     locations: classpath:db/migration
   datasource:
@@ -9,6 +12,7 @@ spring:
     url: ${database.url}
     username: ${database.username}
     password: ${database.password}
+    ## https://github.com/Open-J-Proxy/ojp/blob/main/documents/configuration/ojp-jdbc-configuration.md
     driver-class-name: org.openjproxy.jdbc.Driver
   #    hikari:
 #      poolName: Hikari
